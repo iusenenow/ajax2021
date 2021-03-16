@@ -28,7 +28,7 @@
       //1.创建对象
       const xhr = new XMLHttpRequest()
       //2.初始化：设置请求方法和url
-      xhr.open('GET', 'http://localhost:8000/server')
+      xhr.open('GET', 'http://localhost:8000/server?a=100&b=300&c=300')
       //3.发送
       xhr.send()
       //4.事件绑定：处理服务端返回的结果
@@ -49,9 +49,10 @@
             // console.log(xhr.getAllResponseHeaders())//所有响应头
             // 3.响应体
             // console.log(xhr.response);
+            console.log(xhr)
             result.innerHTML = xhr.response
           } else {
-
+            console.log('could not fetch the data');
           }
         }
       }

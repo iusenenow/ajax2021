@@ -9,7 +9,14 @@ app.get("/server", (req, res) => {
   //设置响应头：设置允许跨域
   res.setHeader('Access-Control-Allow-Origin', '*')
   //设置响应体
-  res.send("Hello AJAX!")
+  res.send("HELLO AJAX!")
+})
+
+app.post("/server", (req, res) => {
+  //设置响应头：设置允许跨域
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  //设置响应体
+  res.send("HELLO AJAX POST!")
 })
 
 //4.监听端口启动服务
