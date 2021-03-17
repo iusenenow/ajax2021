@@ -26,6 +26,8 @@
       console.log(e.key)
 
       const xhr = new XMLHttpRequest()
+      //设置响应体数据的类型(2.自动转换)
+      xhr.responseType = 'json'
 
       xhr.open('GET', 'http://localhost:8000/json-server')
 
@@ -34,8 +36,13 @@
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
           if (xhr.status >= 200 && xhr.status < 300) {
-            console.log(xhr)
-            result.innerHTML = xhr.response
+            console.log(xhr.response);
+            // 1.手动对数据转化
+            // let data = JSON.parse(xhr.response)
+            result.innerHTML = `
+              <h1>Hello, My name is ${xhr.response.name}</h1>
+              <h2>I'm ${xhr.response.age} years old</h2>
+            `
           }
         }
       }
