@@ -26,11 +26,12 @@
 
       xhr.open('POST', 'http://localhost:8000/server')
 
+      //设置请求头
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')//设置请求体内容类型
+      //xhr.setRequestHeader('name', 'Teresa')//自定义头，会报错，需要后端设置
+
       //xhr.send('a=100&b=200&c=300')
       xhr.send('a:100&b:200&c:300')
-
-      //设置请求头
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
 
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {

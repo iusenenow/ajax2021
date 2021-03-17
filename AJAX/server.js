@@ -12,11 +12,23 @@ app.get("/server", (req, res) => {
   res.send("HELLO AJAX!")
 })
 
-app.post("/server", (req, res) => {
+//可以接受任意类型的请求
+app.all("/server", (req, res) => {
   //设置响应头：设置允许跨域
   res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Header', '*')
   //设置响应体
   res.send("HELLO AJAX POST!")
+})
+
+app.all("/json-server", (req, res) => {
+  //设置响应头：设置允许跨域
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Header', '*')
+  //对对象进行转换，因为send方法只能发送字符串和buffer
+  const data = JSON.stringify({ id: 1, name: "Teresa" })
+  //设置响应体
+  res.send(data)
 })
 
 //4.监听端口启动服务
