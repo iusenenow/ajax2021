@@ -25,8 +25,11 @@
     const button1 = document.getElementsByTagName('button')[1]
 
     let xhr = null
+    //标识变量
+    let isSending = false //是否正在发送AJAX请求
 
     button.addEventListener('click', () => {
+      if (isSending) xhr.abort() //如果正在发送，则取消该请求
       xhr = new XMLHttpRequest()
       //超时设置2s
       //xhr.timeout = 2000
@@ -38,13 +41,17 @@
       // xhr.onerror = () => {
       //   alert('你的网络似乎出现了一些问题！')
       // }
+      isSending = true
       xhr.open('GET', 'http://localhost:8000/delay')
 
       //IE缓存解决方案
       //xhr.open('GET', 'http://localhost:8000/ie?t=' + Date.now())
+      //修改标识变量的值
       xhr.send()
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
+          //修改标识变量
+          isSending = false
           if (xhr.status >= 200 && xhr.status < 300) {
             console.log(xhr)
             result.innerHTML = xhr.responseText
