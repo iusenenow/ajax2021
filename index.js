@@ -44,11 +44,17 @@ app.get("/", (req, res) => {
 })
 
 app.post("/", (req, res) => {
-  const { crypto, fiat } = req.body
-  axios.get(`https://apiv2.bitcoinaverage.com/indices/global/ticker/${crypto}${fiat}`)
+  const { crypto, fiat, amount } = req.body
+  axios.get(`https://apiv2.bitcoinaverage.com/indices/global`, {
+    params: {
+      from: crypto,
+      to: fiat,
+      amount
+    }
+  })
     .then(response => res.send(
-      `<h1>The current price of ${crypto} is ${response.data.last} ${fiat}.</h1>
-      <p>The current data is ${response.data.display_currentDate}.</p>`))
+      `<h1>${amount} ${crypto} is currently worth ${response.data.price} ${fiat}.</h1>
+      <p>The current data is ${response.data.time}.</p>`))
     .catch(error => res.send(error.message))
 })
 
