@@ -1,5 +1,6 @@
 //1.引入express
 const express = require("express")
+const axios = require("axios")
 
 //2.创建应用对象
 const app = express()
@@ -40,6 +41,15 @@ app.post("/bmicalculator", (req, res) => {
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/bitcoinTicker.html")
+})
+
+app.post("/", (req, res) => {
+  const { crypto, fiat } = req.body
+  axios.get(`https://apiv2.bitcoinaverage.com/indices/global/ticker/${crypto}${fiat}`)
+    .then(response => res.send(
+      `<h1>The current price of ${crypto} is ${response.data.last} ${fiat}.</h1>
+      <p>The current data is ${response.data.display_currentDate}.</p>`))
+    .catch(error => res.send(error.message))
 })
 
 //4.监听端口启动服务
