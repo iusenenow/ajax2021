@@ -10,23 +10,23 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 
 //3.创建路由规则
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html")
-})
+// app.get("/", (req, res) => {
+//   res.sendFile(__dirname + "/index.html")
+// })
 
-app.get("/contact", (req, res) => {
-  res.send("Contact me at: Teresa@gmail.com")
-})
+// app.get("/contact", (req, res) => {
+//   res.send("Contact me at: Teresa@gmail.com")
+// })
 
-app.get("/about", (req, res) => {
-  res.send("My name is Teresa and I am 11.")
-})
+// app.get("/about", (req, res) => {
+//   res.send("My name is Teresa and I am 11.")
+// })
 
-app.post("/", (req, res) => {
-  const { num1, num2 } = req.body
-  const result = Number(num1) + Number(num2)
-  res.send(`<h1>The result of the calculation is ${result}.</h1>`)
-})
+// app.post("/", (req, res) => {
+//   const { num1, num2 } = req.body
+//   const result = Number(num1) + Number(num2)
+//   res.send(`<h1>The result of the calculation is ${result}.</h1>`)
+// })
 
 app.get("/bmicalculator", (req, res) => {
   res.sendFile(__dirname + "/bmiCalculator.html")
@@ -36,6 +36,10 @@ app.post("/bmicalculator", (req, res) => {
   const { weight, height } = req.body
   const bmi = parseFloat(weight) / parseFloat(height * height)
   res.send(`<h1>Your BMI is ${bmi}.</h1>`)
+})
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/bitcoinTicker.html")
 })
 
 //4.监听端口启动服务
